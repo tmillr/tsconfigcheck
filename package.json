@@ -1,6 +1,6 @@
 {
   "name": "tsconfigcheck",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Quickly check your `tsconfig.json` for missing properties.",
   "homepage": "https://github.com/tmillr/tsconfigcheck#readme",
   "license": "MIT",
@@ -17,6 +17,7 @@
   },
   "main": "index.js",
   "bin": "index.js",
+  "files": ["index.js"],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
