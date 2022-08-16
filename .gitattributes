@@ -1,0 +1,8 @@
+*                                      text=auto
+*.yaml                                 text
+*.[jt]s                                text
+*.[cm][jt]s                            text
+*.yml                                  text
+*.json                                 text
+*.gitignore                            text
+*.gitattributes                        text

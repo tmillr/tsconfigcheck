@@ -1,0 +1,43 @@
+{
+  "name": "tsconfigcheck",
+  "version": "0.0.0",
+  "description": "Quickly check your `tsconfig.json` for missing properties.",
+  "homepage": "https://github.com/tmillr/tsconfigcheck#readme",
+  "license": "MIT",
+  "author": {
+    "name": "Tyler Miller",
+    "url": "https://github.com/tmillr"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tmillr/tsconfigcheck.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tmillr/tsconfigcheck/issues"
+  },
+  "main": "index.js",
+  "bin": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "check",
+    "lint",
+    "json",
+    "schema",
+    "tsconfig",
+    "tsconfig.json",
+    "tsc",
+    "typescript",
+    "configuration",
+    "project",
+    "keys",
+    "properties",
+    "object",
+    "javascript"
+  ],
+  "dependencies": {
+    "json-schema-traverse": "^1.0.0",
+    "json5": "^2.2.1"
+  }
+}
