@@ -1,0 +1,37 @@
+name: Update Schemas
+
+on:
+  schedule: 
+    - cron: '42 8 */2 * *'
+  workflow_dispatch:
+
+jobs:
+  update-schemas:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - run: mkdir -p schemas
+
+      - name: Download Schemas
+        run: |
+          curl \
+            -q \
+            --output-dir schemas \
+            --remote-name-all \
+            -L \
+            --connect-timeout 30 \
+            --max-time 120 \
+            --retry 10 \
+            --retry-delay 60 \
+            --remote-time \
+            --retry-connrefused \
+            --url https://json.schemastore.org/tsconfig.json
+            
+      - uses: peter-evans/create-pull-request@v4
+        with:
+          commit-message: 'chore(schemas): update JSON schemas'
+          branch: schemas/patch
+          delete-branch: true
+          title: 'chore(schemas): update JSON schemas'
+          body: I have found newer JSON schemas...merge me to update them!
