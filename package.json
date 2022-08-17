@@ -1,7 +1,7 @@
 {
   "name": "tsconfigcheck",
   "version": "1.0.0",
-  "description": "Quickly check your `tsconfig.json` for missing properties.",
+  "description": "Quickly check your tsconfig.json for missing properties.",
   "homepage": "https://github.com/tmillr/tsconfigcheck#readme",
   "license": "MIT",
   "author": {
@@ -27,7 +27,7 @@
     "json",
     "schema",
     "tsconfig",
-    "tsconfig.json",
+    "tsconfig-json",
     "tsc",
     "typescript",
     "configuration",
