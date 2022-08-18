@@ -22,6 +22,7 @@
     "index.js"
   ],
   "scripts": {
+    "fmt": "npx prettier",
     "test": "ava"
   },
   "keywords": [
@@ -48,6 +49,7 @@
     "@types/node": "^18.7.6",
     "ava": "^4.3.1",
     "execa": "^6.1.0",
-    "get-bin-path": "^7.1.0"
+    "get-bin-path": "^7.1.0",
+    "prettier": "^2.7.1"
   }
 }

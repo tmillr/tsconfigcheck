@@ -1,0 +1,19 @@
+name: Format Files
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  format-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      - name: Format all files in repo
+        run: npm run fmt
+      - name: Commit and push any formatting corrections/changes
+        run: |
+          git config --local user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config --local user.name 'github-actions[bot]'
+          git diff --quiet || git commit -am 'style: format all files with `npm run fmt`'
