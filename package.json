@@ -17,9 +17,11 @@
   },
   "main": "index.js",
   "bin": "index.js",
-  "files": ["index.js"],
+  "files": [
+    "index.js"
+  ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "ava"
   },
   "keywords": [
     "check",
@@ -40,5 +42,11 @@
   "dependencies": {
     "json-schema-traverse": "^1.0.0",
     "json5": "^2.2.1"
+  },
+  "devDependencies": {
+    "@types/node": "^18.7.6",
+    "ava": "^4.3.1",
+    "execa": "^6.1.0",
+    "get-bin-path": "^7.1.0"
   }
 }
