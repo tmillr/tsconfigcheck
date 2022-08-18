@@ -10,14 +10,14 @@
  *
  */
 
-const fs = require("fs");
-const JSON5 = require("JSON5");
-const traverseSchema = require("json-schema-traverse");
-const https = require("node:https");
+import { readFileSync } from "node:fs";
+import JSON5 from "JSON5";
+import traverseSchema from "json-schema-traverse";
+import { get as httpsGet } from "node:https";
 
 /**
  * @param {URL} url
- * @returns {Promise<string>}
+ * @returns {Promise<string>} the request body
  */
 function request(url) {
   return new Promise((resolve, reject) => {
@@ -30,8 +30,7 @@ function request(url) {
         handleError(new Error("request timed out"));
       }, 30000);
 
-      https
-        .get(url, (res) => {
+      httpsGet(url, (res) => {
           res.on("data", (chunk) => {
             body += chunk;
           });
@@ -109,7 +108,7 @@ async function main() {
   let tsconfig;
   const arg = process.argv[2];
 
-  f = (f || fs.readFileSync(arg ? arg : "./tsconfig.json", "utf8")).replace(
+  f = (f || readFileSync(arg ? arg : "./tsconfig.json", "utf8")).replace(
     /^([ \t]*)\/\/[ \t]*("[^\n]+"\s*:)/gm,
     "$1$2"
   );

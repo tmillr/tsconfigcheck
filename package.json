@@ -15,6 +15,7 @@
   "bugs": {
     "url": "https://github.com/tmillr/tsconfigcheck/issues"
   },
+  "type": "module",
   "main": "index.js",
   "bin": "index.js",
   "files": [
