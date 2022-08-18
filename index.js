@@ -13,6 +13,46 @@
 const fs = require("fs");
 const JSON5 = require("JSON5");
 const traverseSchema = require("json-schema-traverse");
+const https = require("node:https");
+
+/**
+ * @param {URL} url
+ * @returns {Promise<string>}
+ */
+function request(url) {
+  return new Promise((resolve, reject) => {
+    let errorCount = 0;
+
+    function doRequest() {
+      let body = "";
+
+      const timeout = setTimeout(() => {
+        handleError(new Error("request timed out"));
+      }, 30000);
+
+      https
+        .get(url, (res) => {
+          res.on("data", (chunk) => {
+            body += chunk;
+          });
+
+          res.on("end", () => {
+            clearTimeout(timeout);
+            resolve(body);
+          });
+        })
+        .on("error", handleError);
+
+      function handleError(err) {
+        clearTimeout(timeout);
+        if (errorCount++) reject(err);
+        else doRequest();
+      }
+    }
+
+    doRequest();
+  });
+}
 
 function getPropFromPointer(obj, path) {
   path
@@ -64,7 +104,7 @@ function tryAutoFix(err) {
   return false;
 }
 
-(async () => {
+async function main() {
   const list = [];
   let tsconfig;
   const arg = process.argv[2];
@@ -93,7 +133,7 @@ function tryAutoFix(err) {
   };
 
   const schema = JSON.parse(
-    await (await fetch("https://json.schemastore.org/tsconfig.json")).text()
+    await request(new URL("/tsconfig.json", "https://json.schemastore.org"))
   );
 
   traverseSchema(schema, { cb });
@@ -112,4 +152,6 @@ function tryAutoFix(err) {
     ignored.join("\n") + "\n=== END IGNORED SCHEMA PROPERTIES (DEBUG) ===\n"
   );
   console.log(missing.join("\n"));
-})();
+}
+
+main();
