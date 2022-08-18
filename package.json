@@ -22,7 +22,7 @@
     "index.js"
   ],
   "scripts": {
-    "fmt": "npx prettier .",
+    "fmt": "npx prettier --write .",
     "test": "ava"
   },
   "keywords": [
