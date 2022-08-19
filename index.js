@@ -31,16 +31,15 @@ function request(url) {
       }, 30000);
 
       httpsGet(url, (res) => {
-          res.on("data", (chunk) => {
-            body += chunk;
-          });
+        res.on("data", (chunk) => {
+          body += chunk;
+        });
 
-          res.on("end", () => {
-            clearTimeout(timeout);
-            resolve(body);
-          });
-        })
-        .on("error", handleError);
+        res.on("end", () => {
+          clearTimeout(timeout);
+          resolve(body);
+        });
+      }).on("error", handleError);
 
       function handleError(err) {
         clearTimeout(timeout);
