@@ -1,6 +1,7 @@
 # tsconfigcheck
 
 [![npm](https://img.shields.io/npm/v/tsconfigcheck?color=red)](https://www.npmjs.com/package/tsconfigcheck)
+[![install size](https://packagephobia.com/badge?p=tsconfigcheck)](https://packagephobia.com/result?p=tsconfigcheck)
 
 Quickly check your `tsconfig.json` for missing properties.
 
