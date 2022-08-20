@@ -10,7 +10,7 @@ Quickly check your `tsconfig.json` for missing properties.
 ## Why?
 
 1. `tsc --init` only includes a subset of all truly possible tsconfig properties.
-2. The [tsconfig reference] itself doesn't necessarily document each and every possible property.
+2. The [tsconfig reference] itself doesn't necessarily document _each and every_ possible property.
 3. Opening a browser window every time just to check for new properties can be a hassle.
 4. ?
 5. OCD (probably)
@@ -18,16 +18,21 @@ Quickly check your `tsconfig.json` for missing properties.
 ## Install
 
 ```sh
-# Global installation (recommended)
 npm i -g tsconfigcheck
+```
 
-# Package-local installation
+For one-off/impromptu invocations without worrying about local or global installation, skip the installation step above and use `npx` (see [Usage](#usage)).
+
+You may also install the cli/binary locally inside of your package if you'd like. This will add tsconfigcheck to your developer dependencies (via the `-D` flag) inside your `package.json` and will place the physical binary inside of the local `node_modules` directory.
+
+```sh
+# Note: cd into your package's root directory first
 npm i -D tsconfigcheck
 ```
 
-- Make sure you have a recent version of `node` installed.
+Then, to run the locally installed binary, use `npx` (see [Usage](#usage)).
 
-- If you don't have a `tsconfig.json` yet for your TypeScript project, you can generate one with `tsc --init`. You can also make the contents of tsconfig.json an empty object `{}` in order to simply get back a list of all valid properties from the schema.
+> If you don't have a `tsconfig.json` yet for your TypeScript project, you can generate one with `tsc --init`. You can also make the contents of tsconfig.json an empty object `{}` in order to simply get back a list of _all_ valid properties from the schema.
 
 ## Usage
 
@@ -35,7 +40,7 @@ npm i -D tsconfigcheck
 # Missing path defaults to tsconfig.json in the current directory
 tsconfigcheck [tsconfigpath]
 
-# To run a local installation
+# To run a local installation, or, if you skipped the manual installation step
 npx tsconfigcheck [tsconfigpath]
 ```
 
