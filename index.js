@@ -31,6 +31,10 @@ function request(url) {
       }, 30000);
 
       httpsGet(url, (res) => {
+        // TODO: Handle 3XX codes/redirects?
+        if (res.statusCode !== 200)
+          return reject(new Error(`bad response: ${res.statusCode}`));
+
         res.on("data", (chunk) => {
           body += chunk;
         });
