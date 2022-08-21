@@ -12,3 +12,4 @@ jobs:
       - uses: google-github-actions/release-please-action@v3
         with:
           release-type: node
+          bootstrap-sha: dd466e8d671cb8ec55b39767624c775acfdfc63d
