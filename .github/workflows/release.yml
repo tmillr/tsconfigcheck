@@ -9,7 +9,24 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
-      - uses: google-github-actions/release-please-action@v3
+      - id: release
+        uses: google-github-actions/release-please-action@v3
         with:
           release-type: node
           bootstrap-sha: dd466e8d671cb8ec55b39767624c775acfdfc63d
+          
+      - name: Generate Release Please Run Summary
+        env: 
+          RELEASE_INFO: ${{ toJSON(steps.release.outputs) }}
+        run: |
+          printf '```json\n%s\n```' "$RELEASE_INFO" >> "$GITHUB_STEP_SUMMARY"
+          
+      - if: steps.release.outputs.pr != ''
+        uses: actions/setup-node@v3
+
+      - if: steps.release.outputs.pr != ''
+        env:
+          PR_NUMBER: ${{ fromJSON(steps.release.outputs.pr).number }}
+        run: |
+          x="$(npm publish --dry-run | tee "$GITHUB_STEP_SUMMARY")"
+          gh pr comment "$PR_NUMBER" -b "$x"
