@@ -23,6 +23,11 @@ jobs:
           
       - if: steps.release.outputs.pr != ''
         uses: actions/setup-node@v3
+        
+      - if: steps.release.outputs.pr != ''
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ fromJSON(steps.release.outputs.pr).headBranchName }}
 
       - if: steps.release.outputs.pr != ''
         env:
