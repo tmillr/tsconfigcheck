@@ -112,8 +112,8 @@ async function main() {
   const arg = process.argv[2];
 
   f = (f || readFileSync(arg ? arg : "./tsconfig.json", "utf8")).replace(
-    /^([ \t]*)\/\/[ \t]*("[^\n]+"\s*:)/gm,
-    "$1$2"
+    /^([ \t]*)\/\/[ \t\/]*/gmu,
+    "$1"
   );
 
   while (true)
