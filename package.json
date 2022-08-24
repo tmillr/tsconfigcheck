@@ -1,6 +1,6 @@
 {
   "name": "tsconfigcheck",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Quickly check your tsconfig.json for missing properties.",
   "homepage": "https://github.com/tmillr/tsconfigcheck#readme",
   "license": "MIT",
