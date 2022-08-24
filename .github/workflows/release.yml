@@ -1,4 +1,8 @@
-name: Release
+name: default-branch-push
+
+concurrency:
+  group: default-branch-push
+  cancel-in-progress: true
 
 on:
   push:
@@ -6,31 +10,20 @@ on:
       - master
 
 jobs:
-  release:
+  format-files:
+    uses: ./.github/workflows/format-files.yml
+
+  release-please:
+    if: always()
     runs-on: ubuntu-latest
+    needs: format-files
     steps:
       - id: release
         uses: google-github-actions/release-please-action@v3
         with:
-          release-type: node
-          bootstrap-sha: dd466e8d671cb8ec55b39767624c775acfdfc63d
-          
-      - name: Generate Release Please Run Summary
-        env: 
-          RELEASE_INFO: ${{ toJSON(steps.release.outputs) }}
-        run: printf '```json\n%s\n```' "$RELEASE_INFO" >> "$GITHUB_STEP_SUMMARY"
-          
-      - if: steps.release.outputs.pr != ''
-        uses: actions/setup-node@v3
-        
-      - if: steps.release.outputs.pr != ''
-        uses: actions/checkout@v2
-        with:
-          ref: ${{ fromJSON(steps.release.outputs.pr).headBranchName }}
+          command: manifest
 
-      - if: steps.release.outputs.pr != ''
+      - name: Generate Summary of `Release Please` Run
         env:
-          PR_NUMBER: ${{ steps.release.outputs.pr != '' && fromJSON(steps.release.outputs.pr).number }}
-        run: |
-          x="$(npm publish --dry-run | tee "$GITHUB_STEP_SUMMARY")"
-          gh pr comment "$PR_NUMBER" -b "$x"
+          RP_OUTPUT: ${{ toJSON(steps.release-please.outputs) }}
+        run: printf '```json\n%s\n```' "$RP_OUTPUT" >> "$GITHUB_STEP_SUMMARY"
