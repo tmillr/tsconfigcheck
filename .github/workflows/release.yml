@@ -25,5 +25,5 @@ jobs:
 
       - name: Generate Summary of `Release Please` Run
         env:
-          RP_OUTPUT: ${{ toJSON(steps.release-please.outputs) }}
+          RP_OUTPUT: ${{ toJSON(steps.release.outputs) }}
         run: printf '```json\n%s\n```' "$RP_OUTPUT" >> "$GITHUB_STEP_SUMMARY"
