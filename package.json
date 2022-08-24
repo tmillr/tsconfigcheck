@@ -22,7 +22,8 @@
   "main": "index.js",
   "bin": "index.js",
   "files": [
-    "index.js"
+    "index.js",
+    "CHANGELOG.md"
   ],
   "scripts": {
     "fmt": "npx prettier --write .",
