@@ -16,6 +16,9 @@
     "url": "https://github.com/tmillr/tsconfigcheck/issues"
   },
   "type": "module",
+  "engines": {
+    "node": ">=12.17"
+  },
   "main": "index.js",
   "bin": "index.js",
   "files": [
